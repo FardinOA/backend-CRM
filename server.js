@@ -14,18 +14,21 @@ app.use(cookieParser());
 
 app.use("/api/v1/user", userRouter);
 
-const PORT = process.env.PORT || 8000;
+app.get("/", (req, res) => {
+    res.json({ message: "test" });
+});
 
+const PORT = process.env.PORT || 8000;
 
 // Database connection
 const DB = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
+    "<PASSWORD>",
+    process.env.DATABASE_PASSWORD
 );
 mongoose.connect(DB).then(() => {
-  console.log("Database connection successfully!");
+    console.log("Database connection successfully!");
 });
 
 app.listen(PORT, () => {
-  console.log("server running at port ", PORT);
+    console.log("server running at port ", PORT);
 });
